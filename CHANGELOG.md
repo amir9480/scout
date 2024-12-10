@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/scout/compare/v10.11.8...10.x)
+## [Unreleased](https://github.com/laravel/scout/compare/v10.11.9...10.x)
+
+## [v10.11.9](https://github.com/laravel/scout/compare/v10.11.8...v10.11.9) - 2024-12-10
+
+* fix: merge Algolia4 options into query parameters by [@MingJen](https://github.com/MingJen) in https://github.com/laravel/scout/pull/891
+* Adding orderByDesc function to Builder by [@jdavidbakr](https://github.com/jdavidbakr) in https://github.com/laravel/scout/pull/893
 
 ## [v10.11.8](https://github.com/laravel/scout/compare/v10.11.7...v10.11.8) - 2024-11-26
 
