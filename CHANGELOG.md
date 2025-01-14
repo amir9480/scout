@@ -1,6 +1,11 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/scout/compare/v10.11.9...10.x)
+## [Unreleased](https://github.com/laravel/scout/compare/v10.12.0...10.x)
+
+## [v10.12.0](https://github.com/laravel/scout/compare/v10.11.9...v10.12.0) - 2025-01-14
+
+* feat: Algolia settings sync by [@joostdebruijn](https://github.com/joostdebruijn) in https://github.com/laravel/scout/pull/889
+* perf(typesense): skip collection check for search operations by [@tharropoulos](https://github.com/tharropoulos) in https://github.com/laravel/scout/pull/898
 
 ## [v10.11.9](https://github.com/laravel/scout/compare/v10.11.8...v10.11.9) - 2024-12-10
 
