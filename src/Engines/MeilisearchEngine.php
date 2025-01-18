@@ -353,7 +353,7 @@ class MeilisearchEngine extends Engine implements UpdatesIndexSettings
      */
     public function getTotalCount($results)
     {
-        return $results['totalHits'];
+        return $results['totalHits'] ?? $results['estimatedTotalHits'];
     }
 
     /**
