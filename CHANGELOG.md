@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/scout/compare/v10.12.1...10.x)
+## [Unreleased](https://github.com/laravel/scout/compare/v10.12.2...10.x)
+
+## [v10.12.2](https://github.com/laravel/scout/compare/v10.12.1...v10.12.2) - 2025-01-28
+
+* Supports Laravel 12 by [@crynobone](https://github.com/crynobone) in https://github.com/laravel/scout/pull/902
 
 ## [v10.12.1](https://github.com/laravel/scout/compare/v10.12.0...v10.12.1) - 2025-01-21
 
