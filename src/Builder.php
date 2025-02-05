@@ -48,6 +48,13 @@ class Builder
     public $queryCallback;
 
     /**
+     * Optional callback after raw search.
+     *
+     * @var \Closure|null
+     */
+    public $afterRawSearchCallback;
+
+    /**
      * The custom index specified for the search.
      *
      * @var string
@@ -311,6 +318,19 @@ class Builder
     }
 
     /**
+     * Set the callback that should have an opportunity to inspect and modify the raw result returned by the search engine.
+     *
+     * @param  callable  $callback
+     * @return $this
+     */
+    public function withRawResults($callback)
+    {
+        $this->afterRawSearchCallback = $callback;
+
+        return $this;
+    }
+
+    /**
      * Get the keys of search results.
      *
      * @return \Illuminate\Support\Collection
@@ -373,7 +393,9 @@ class Builder
         $perPage = $perPage ?: $this->model->getPerPage();
 
         $results = $this->model->newCollection($engine->map(
-            $this, $rawResults = $engine->paginate($this, $perPage, $page), $this->model
+            $this,
+            $this->applyAfterRawSearchCallback($rawResults = $engine->paginate($this, $perPage, $page)),
+            $this->model
         )->all());
 
         $paginator = Container::getInstance()->makeWith(Paginator::class, [
@@ -411,7 +433,7 @@ class Builder
 
         $perPage = $perPage ?: $this->model->getPerPage();
 
-        $results = $engine->paginate($this, $perPage, $page);
+        $results = $this->applyAfterRawSearchCallback($engine->paginate($this, $perPage, $page));
 
         $paginator = Container::getInstance()->makeWith(Paginator::class, [
             'items' => $results,
@@ -449,7 +471,9 @@ class Builder
         $perPage = $perPage ?: $this->model->getPerPage();
 
         $results = $this->model->newCollection($engine->map(
-            $this, $rawResults = $engine->paginate($this, $perPage, $page), $this->model
+            $this,
+            $this->applyAfterRawSearchCallback($rawResults = $engine->paginate($this, $perPage, $page)),
+            $this->model
         )->all());
 
         return Container::getInstance()->makeWith(LengthAwarePaginator::class, [
@@ -486,7 +510,7 @@ class Builder
 
         $perPage = $perPage ?: $this->model->getPerPage();
 
-        $results = $engine->paginate($this, $perPage, $page);
+        $results = $this->applyAfterRawSearchCallback($engine->paginate($this, $perPage, $page));
 
         return Container::getInstance()->makeWith(LengthAwarePaginator::class, [
             'items' => $results,
@@ -529,6 +553,21 @@ class Builder
         return $this->model->queryScoutModelsByIds(
             $this, $ids
         )->toBase()->getCountForPagination();
+    }
+
+    /**
+     * Invoke the "after raw search" callback.
+     *
+     * @param  mixed  $results
+     * @return mixed
+     */
+    public function applyAfterRawSearchCallback($results)
+    {
+        if ($this->afterRawSearchCallback) {
+            call_user_func($this->afterRawSearchCallback, $results);
+        }
+
+        return $results;
     }
 
     /**
