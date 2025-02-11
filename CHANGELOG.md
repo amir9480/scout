@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/scout/compare/v10.12.2...10.x)
+## [Unreleased](https://github.com/laravel/scout/compare/v10.13.0...10.x)
+
+## [v10.13.0](https://github.com/laravel/scout/compare/v10.12.2...v10.13.0) - 2025-02-11
+
+* [10.x] Allow to pass Arrayable to `whereIn` and `whereNotIn` queries by [@Joel-Jensen](https://github.com/Joel-Jensen) in https://github.com/laravel/scout/pull/905
+* [10.x] `afterRawSearch` callback by [@gdebrauwer](https://github.com/gdebrauwer) in https://github.com/laravel/scout/pull/904
+* Fix: [Typesense] Add custom index support by [@fabkho](https://github.com/fabkho) in https://github.com/laravel/scout/pull/908
 
 ## [v10.12.2](https://github.com/laravel/scout/compare/v10.12.1...v10.12.2) - 2025-01-28
 
