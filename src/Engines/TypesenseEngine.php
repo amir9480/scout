@@ -249,7 +249,6 @@ class TypesenseEngine extends Engine
             false,
         )->getDocuments();
 
-
         if ($builder->callback) {
             return call_user_func($builder->callback, $documents, $builder->query, $options);
         }
