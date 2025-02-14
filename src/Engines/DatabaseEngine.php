@@ -351,6 +351,27 @@ class DatabaseEngine extends Engine implements PaginatesEloquentModelsUsingDatab
     }
 
     /**
+     * Get the results of the query as a Collection of primary keys.
+     *
+     * @param  \Laravel\Scout\Builder  $builder
+     * @return \Illuminate\Support\Collection
+     */
+    public function keys(Builder $builder)
+    {
+        return $this->mapIds($this->search(tap(clone $builder, function ($builder) {
+            $queryCallback = $builder->queryCallback;
+         
+            $builder->query(function ($databaseQuery) use ($builder, $queryCallback) {
+                $databaseQuery->select($builder->model->getScoutKeyName());
+
+                if ($queryCallback) {
+                    $queryCallback($databaseQuery);
+                }
+            });
+        })));
+    }
+
+    /**
      * Pluck and return the primary keys of the given results.
      *
      * @param  mixed  $results
